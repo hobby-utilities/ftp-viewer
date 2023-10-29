@@ -7,6 +7,7 @@ import FtpViewer from "./FtpViewer.vue";
 
 const ftpConnectionStore = useFtpConnectionStore()
 
+/** 사용자가 입력한 FTP 연결에 필요한 입력값들 */
 const connectionInputs = reactive({
   url:'',
   username: '',
@@ -15,18 +16,31 @@ const connectionInputs = reactive({
   modifiedAliasByUser: false,
 })
 
+/**
+ * ID 입력 시 `connectionInputs.alias`를 필요에 따라 자동 입력하는 이벤트
+ */
 function onChangeUsername() {
   _updateAlias()
 }
 
+/**
+ * FTP URL 입력 시 `connectionInputs.alias`를 필요에 따라 자동 입력하는 이벤트
+ */
 function onChangeUrl() {
   _updateAlias()
 }
 
+/**
+ * alias 입력 시 username 또는 url 입력에 따라 자동으로 alias가 변하지 않도록 설정
+ */
 function onChangeAlias() {
   connectionInputs.modifiedAliasByUser = true
 }
 
+/**
+ * 연결(connect) 클릭 시 FTP에 연결하고 connection ID를 store에 등록한다.
+ * 등록될 경우 새로운 tab이 생성된다.
+ */
 function onClickConnect() {
   const reg = /^.+:\d/g
 
