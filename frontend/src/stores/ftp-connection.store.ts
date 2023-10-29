@@ -20,9 +20,7 @@ export const useFtpConnectionStore = defineStore('ftp-connection', () => {
 
     async function connect(url: string, username: string, password: string, alias: string): Promise<string> {
 
-        alert('getcha')
         const connectionId = await Connect(url, username, password)
-        alert(connectionId)
 
         alias = alias === undefined || alias.trim().length === 0
             ? `${username}@${url}`
